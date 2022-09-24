@@ -38,14 +38,13 @@ public class CursoService {
 	}
 	
 	public List<Curso> buscarCursoPeloId(Long cursoId){
-		
 		List<Curso> lCursos = new ArrayList<>();
 		for(int i=0; i < listaDeCursos.size(); i++) {
 			if(listaDeCursos.get(i).getId() == cursoId) {
 				lCursos.add(listaDeCursos.get(i));
 			}
 		}
-		return lCursos;
+		return lCursos;  
 	}
 	
 	public Curso criarCurso(Curso curso) {

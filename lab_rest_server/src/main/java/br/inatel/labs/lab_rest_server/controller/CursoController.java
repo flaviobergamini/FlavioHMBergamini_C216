@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.inatel.labs.lab_rest_server.exceptions.CursoNaoEncontradoException;
 import br.inatel.labs.lab_rest_server.model.Curso;
 import br.inatel.labs.lab_rest_server.service.CursoService;
 
@@ -61,12 +62,11 @@ public class CursoController {
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable("id") Long cursoId) {
-		boolean verifica = servico.removerCursoPeloId(cursoId);
+	public void remover(@PathVariable("id") Long cursoIdParaRemover) {
+		boolean verifica = servico.removerCursoPeloId(cursoIdParaRemover);
 		
 		if(verifica == false) {
-			String message = String.format("Nenhum curso encontrado com o id [%s]", cursoId);
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
+			throw new CursoNaoEncontradoException(cursoIdParaRemover);
 		}
 	}
 	
